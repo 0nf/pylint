@@ -24,6 +24,7 @@ permissions:
 
 jobs:
   run-primer:
+    if: false
     name: Run / ${{ matrix.python-version }} / batch index ${{ matrix.batchIdx }}
     runs-on: ubuntu-latest
     timeout-minutes: 45

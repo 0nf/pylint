@@ -619,16 +619,19 @@ class PyLinter(
                 self._msgs_state[msg.msgid] = False
 
     def register_local_config(self, file_or_dir: str) -> None:
+        print("register_local_config DEBUG:")
         if os.path.isdir(file_or_dir):
             basedir = Path(file_or_dir)
         else:
             basedir = Path(os.path.dirname(file_or_dir))
+        print(f"{basedir = }")
 
         if _is_relative_to(basedir, Path(os.getcwd())):
             scan_root_dir = Path(os.getcwd())
         else:
-            scan_root_dir = Path("/")
+            scan_root_dir = Path(basedir.parts[0])
 
+        print(f"{scan_root_dir = }")
         while basedir.resolve() not in self._directory_namespaces and _is_relative_to(
             basedir, scan_root_dir
         ):

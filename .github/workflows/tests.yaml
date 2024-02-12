@@ -3,13 +3,11 @@ name: Tests
 on:
   push:
     branches:
-      - main
-      - "maintenance/**"
+      - "per_directory_configs__debug"
     paths-ignore:
       - doc/data/messages/**
   pull_request:
     branches:
-      - main
       - "maintenance/**"
 
 env:
@@ -69,7 +67,7 @@ jobs:
         run: |
           . venv/bin/activate
           pip list | grep 'astroid\|pylint'
-          python -m pytest --durations=10 --benchmark-disable --cov --cov-report= tests/
+          python -m pytest --durations=10 --benchmark-disable --cov --cov-report= tests/config/test_per_directory_config.py
       - name: Run functional tests with minimal messages config
         run: |
           . venv/bin/activate
@@ -82,6 +80,7 @@ jobs:
           path: .coverage
 
   coverage:
+    if: false
     name: process / coverage
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -214,7 +213,7 @@ jobs:
         run: |
           . venv\\Scripts\\activate
           pip list | grep 'astroid\|pylint'
-          python -m pytest --durations=10 --benchmark-disable tests/
+          python -m pytest --durations=10 --benchmark-disable tests/config/test_per_directory_config.py
 
   tests-macos:
     name: run / ${{ matrix.python-version }} / macOS
@@ -263,6 +262,7 @@ jobs:
           python -m pytest --durations=10 --benchmark-disable tests/
 
   tests-pypy:
+    if: false
     name: run / ${{ matrix.python-version }} / Linux
     runs-on: ubuntu-latest
     timeout-minutes: 25

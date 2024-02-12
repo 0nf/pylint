@@ -87,7 +87,7 @@ def test_subconfig_vs_root_config(
     start_dir = (level1_dir / start_dir_modificator).resolve()
 
     orig_cwd = os.getcwd()
-    output = [f"{start_dir = }, {test_file = }"]
+    output = [f"{start_dir = }\n{test_file = }\n"]
     os.chdir(start_dir)
     for _ in range(2):
         # _Run adds --rcfile, which overrides config from cwd, so we need original Run here
@@ -141,7 +141,7 @@ def test_missing_local_config(
     start_dir = (level1_dir / start_dir_modificator).resolve()
 
     orig_cwd = os.getcwd()
-    output = [f"{start_dir = }, {test_file = }"]
+    output = [f"{start_dir = }\n{test_file = }\n"]
     os.chdir(start_dir)
     for _ in range(2):
         # _Run adds --rcfile, which overrides config from cwd, so we need original Run here
